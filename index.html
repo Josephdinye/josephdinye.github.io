@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Joseph Dinye</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background: #f4f6f8;
+      margin: 0;
+      padding: 0;
+    }
+
+    h1 {
+      margin-top: 30px;
+      color: #222;
+    }
+
+    p {
+      color: #444;
+      margin-bottom: 20px;
+    }
+
+    .container {
+      max-width: 400px;
+      margin: 30px auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+
+    input {
+      width: 90%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    button {
+      width: 95%;
+      padding: 10px;
+      margin-top: 10px;
+      background: #0078d7;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #005a9e;
+    }
+
+    .toggle-link {
+      margin-top: 15px;
+      display: block;
+      color: #0078d7;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>Welcome to Joseph Dinye’s Website 🚀</h1>
+  <p>This site is hosted for free using GitHub Pages + josephdinye.tech.</p>
+
+  <div class="container" id="auth-container">
+    <!-- Login Form -->
+    <div id="login-form">
+      <h2>Login</h2>
+      <input type="text" placeholder="Username" id="login-username">
+      <input type="password" placeholder="Password" id="login-password">
+      <button onclick="login()">Login</button>
+      <span class="toggle-link" onclick="toggleForm('signup')">Don't have an account? Sign Up</span>
+    </div>
+
+    <!-- Signup Form -->
+    <div id="signup-form" style="display:none;">
+      <h2>Sign Up</h2>
+      <input type="text" placeholder="Username" id="signup-username">
+      <input type="email" placeholder="Email" id="signup-email">
+      <input type="password" placeholder="Password" id="signup-password">
+      <button onclick="signup()">Sign Up</button>
+      <span class="toggle-link" onclick="toggleForm('login')">Already have an account? Login</span>
+    </div>
+  </div>
+
+  <script>
+    function toggleForm(form) {
+      if(form === 'signup') {
+        document.getElementById('login-form').style.display = 'none';
+        document.getElementById('signup-form').style.display = 'block';
+      } else {
+        document.getElementById('signup-form').style.display = 'none';
+        document.getElementById('login-form').style.display = 'block';
+      }
+    }
+
+    function login() {
+      let user = document.getElementById("login-username").value;
+      alert("Welcome back, " + user + "!");
+    }
+
+    function signup() {
+      let user = document.getElementById("signup-username").value;
+      alert("Account created for " + user + "!");
+    }
+  </script>
+</body>
+</html>
