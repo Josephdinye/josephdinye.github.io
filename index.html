@@ -17,6 +17,39 @@
       display: block;
       box-shadow: 0 0 15px rgba(0,0,0,0.4);
     }
+
+    /* Navbar Styling */
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .hamburger {
+      display: none;
+      font-size: 28px;
+      cursor: pointer;
+      color: white;
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        background: rgba(0,0,0,0.9);
+        position: absolute;
+        top: 60px;
+        right: 0;
+        width: 200px;
+        padding: 20px;
+      }
+      .nav-links.active {
+        display: flex;
+      }
+      .hamburger {
+        display: block;
+      }
+    }
   </style>
 </head>
 <body>
@@ -31,32 +64,6 @@
       <a href="index.html" class="logo-link">
         <span class="logo-text">JOSEPH TECH SOLUTION</span>
       </a>
-      <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="skills.html">Skills</a></li>
-        <li><a href="experience.html">Experience</a></li>
-        <li><a href="education.html">Education</a></li>
-        <li><a href="publication.html">Publication</a></li>
-        <li><a href="interests.html">Interests</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
-    </div>
-  </nav>
-
-  <!-- Hero Section -->
-  <section class="hero">
-    <div class="hero-content">
-      <h1 class="glitch-text">JOSEPH DINYE</h1>
-      <img src="https://raw.githubusercontent.com/josephdinye/josephdinye.github.io/main/JOSEPH%20DINYE%20(1).jpg" alt="Joseph Dinye" class="profile-img">
-      <p class="subtitle">BSc Computer Science Student | University of the People</p>
-      <p class="subtitle">Tech Enthusiast • Virtual Assistant • Aspiring Computer Scientist, Software Developer and Data Scientist</p>
-      <a href="JOSEPH DINYE CV ma.pdf" class="cta-button cta-primary" download>Download My CV</a>
-    </div>
-  </section>
-
-  <footer>
-    <p>© 2025 Joseph Dinye | Joseph Tech Solution. All rights reserved.</p>
-  </footer>
-</body>
-</html>
+      <span class="hamburger" onclick="toggleMenu()">☰</span>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">
