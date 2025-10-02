@@ -40,6 +40,23 @@ https://templatemo.com/tm-596-electric-xtra
             z-index: -2;
         }
 
+.profile-img {
+  width: 160px;
+  height: 160px;
+  object-fit: cover;       /* makes sure the face is centered */
+  border-radius: 50%;      /* perfect circle */
+  border: 3px solid #fff;  /* white border */
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); /* glowing shadow */
+  margin: 20px auto;
+  display: block;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.profile-img:hover {
+  transform: scale(1.05);  /* zoom-in effect */
+  box-shadow: 0 0 30px rgba(0, 255, 200, 0.7); /* neon hover glow */
+}
+
         /* Animated shapes */
         .shapes-container {
             position: fixed;
