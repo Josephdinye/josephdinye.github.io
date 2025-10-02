@@ -133,9 +133,18 @@
   <script>
     const menuToggle = document.getElementById("menu-toggle");
     const navLinks = document.getElementById("nav-links");
+    const links = navLinks.querySelectorAll("a");
 
+    // Toggle menu open/close
     menuToggle.addEventListener("click", () => {
       navLinks.classList.toggle("show");
+    });
+
+    // Close menu when clicking a link
+    links.forEach(link => {
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("show");
+      });
     });
   </script>
 </body>
