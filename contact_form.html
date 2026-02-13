@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us Form</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            max-width: 600px; 
+            margin: 20px auto; 
+            padding: 20px; 
+        }
+        h1 { text-align: center; }
+        label { display: block; margin-top: 15px; font-weight: bold; }
+        input[type="text"], input[type="email"], input[type="tel"], textarea, select {
+            width: 100%; 
+            padding: 8px; 
+            margin-top: 5px; 
+            box-sizing: border-box;
+        }
+        .radio-group { 
+            margin-top: 10px; 
+            display: flex;          /* Makes children horizontal */
+            align-items: center;    /* Vertically centers radio + label */
+            gap: 25px;              /* Space between options */
+        }
+        .radio-group label {
+            display: flex;
+            align-items: center;
+            margin: 0;              /* Remove block margin */
+            font-weight: normal;
+            cursor: pointer;
+        }
+        .radio-group input[type="radio"] {
+            margin-right: 8px;
+        }
+        .error { 
+            color: red; 
+            font-size: 0.9em; 
+            margin-top: 5px; 
+            display: none; 
+        }
+        #preview { 
+            border: 1px solid #ccc; 
+            padding: 15px; 
+            margin-top: 30px; 
+            background-color: #f9f9f9; 
+            border-radius: 5px; 
+            display: none;
+        }
+        button { 
+            margin-top: 20px; 
+            padding: 10px 20px; 
+            font-size: 1em; 
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Contact Us</h1>
+
+<form id="contactForm" action="https://josephdinye.tech/submit" method="post" novalidate>
+    
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required>
+    <div id="emailError" class="error">Please enter a valid email address.</div>
+
+    <label for="phone">Phone Number:</label>
+    <input type="tel" id="phone" name="phone" required pattern="\d{10}" title="Phone must be exactly 10 digits">
+    <div id="phoneError" class="error">Phone number must contain exactly 10 digits (0-9 only).</div>
+
+    <label for="message">Message:</label>
+    <textarea id="message" name="message" rows="5" required></textarea>
+
+    <fieldset class="radio-group">
+        <legend style="font-weight: bold; margin-bottom: 8px;">Preferred Contact Method:</legend>
+        <label>
+            <input type="radio" id="emailPref" name="contact_method" value="Email" required>
+            Email
+        </label>
+        <label>
+            <input type="radio" id="phonePref" name="contact_method" value="Phone">
+            Phone
+        </label>
+        <label>
+            <input type="radio" id="bothPref" name="contact_method" value="Both">
+            Both
+        </label>
+    </fieldset>
+    <div id="contactError" class="error">Please select a preferred contact method.</div>
+
+    <label for="inquiry">Inquiry Type:</label>
+    <select id="inquiry" name="inquiry_type" required>
+        <option value="">Select an option</option>
+        <option value="General Inquiry">General Inquiry</option>
+        <option value="Support Request">Support Request</option>
+        <option value="Feedback">Feedback</option>
+    </select>
+    <div id="inquiryError" class="error">Please select an inquiry type.</div>
+
+    <button type="button" onclick="showPreview()">Preview</button>
+    <button type="submit">Submit</button>
+</form>
+
+<div id="preview">
+    <h2>Preview of Your Submission</h2>
+    <p><strong>Name:</strong> <span id="prevName"></span></p>
+    <p><strong>Email:</strong> <span id="prevEmail"></span></p>
+    <p><strong>Phone Number:</strong> <span id="prevPhone"></span></p>
+    <p><strong>Message:</strong> <span id="prevMessage"></span></p>
+    <p><strong>Preferred Contact Method:</strong> <span id="prevContact"></span></p>
+    <p><strong>Inquiry Type:</strong> <span id="prevInquiry"></span></p>
+</div>
+
+<script>
+function validateForm() {
+    let isValid = true;
+    const errors = document.querySelectorAll('.error');
+    errors.forEach(el => el.style.display = 'none');
+
+    if (!document.getElementById('name').value.trim()) {
+        isValid = false;
+    }
+    if (!document.getElementById('message').value.trim()) {
+        isValid = false;
+    }
+
+    const email = document.getElementById('email');
+    if (email.validity.valueMissing) {
+        document.getElementById('emailError').textContent = "Email is required.";
+        document.getElementById('emailError').style.display = 'block';
+        isValid = false;
+    } else if (!email.checkValidity()) {
+        document.getElementById('emailError').textContent = "Please enter a valid email address.";
+        document.getElementById('emailError').style.display = 'block';
+        isValid = false;
+    }
+
+    const phone = document.getElementById('phone').value.trim();
+    if (phone === '') {
+        document.getElementById('phoneError').textContent = "Phone number is required.";
+        document.getElementById('phoneError').style.display = 'block';
+        isValid = false;
+    } else if (!/^\d{10}$/.test(phone)) {
+        document.getElementById('phoneError').textContent = "Phone number must contain exactly 10 digits (0-9 only).";
+        document.getElementById('phoneError').style.display = 'block';
+        isValid = false;
+    }
+
+    const contactMethod = document.querySelector('input[name="contact_method"]:checked');
+    if (!contactMethod) {
+        document.getElementById('contactError').style.display = 'block';
+        isValid = false;
+    }
+
+    if (document.getElementById('inquiry').value === '') {
+        document.getElementById('inquiryError').style.display = 'block';
+        isValid = false;
+    }
+
+    return isValid;
+}
+
+function showPreview() {
+    if (!validateForm()) {
+        alert("Please correct the errors in the form before previewing.");
+        return;
+    }
+
+    document.getElementById('prevName').textContent = document.getElementById('name').value;
+    document.getElementById('prevEmail').textContent = document.getElementById('email').value;
+    document.getElementById('prevPhone').textContent = document.getElementById('phone').value;
+    document.getElementById('prevMessage').textContent = document.getElementById('message').value;
+    
+    const contact = document.querySelector('input[name="contact_method"]:checked');
+    document.getElementById('prevContact').textContent = contact ? contact.value : '';
+    
+    document.getElementById('prevInquiry').textContent = document.getElementById('inquiry').value;
+
+    document.getElementById('preview').style.display = 'block';
+    window.scrollTo(0, document.body.scrollHeight);
+}
+
+document.querySelectorAll('input, textarea, select').forEach(el => {
+    el.addEventListener('input', () => {
+        document.getElementById('preview').style.display = 'none';
+    });
+});
+</script>
+
+</body>
+</html>
