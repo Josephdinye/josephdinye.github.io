@@ -1,5 +1,4 @@
-// Create floating particles
-        function createParticles() {
+function createParticles() {
             const particlesContainer = document.getElementById('particles');
             const particleCount = 30;
 
